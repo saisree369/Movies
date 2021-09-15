@@ -57,7 +57,7 @@ this.searchFilterFunction = this.searchFilterFunction.bind(this);
 componentWillMount() {
   
     return fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=e60f97467e53623440ba3a914746753f&language=en-US",
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=xxx&language=en-US",
       {
         method: "GET"
       }
