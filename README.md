@@ -42,7 +42,50 @@ which displays the genre items and on applying search, it filters the genre base
 On clicking genre item in search screen it navigates to this screen and displays the Movie apps.
 
 ## Long description
-[More detail ia available here](https://github.com/saisree369/Movies/docs/Movie Vice App.docx)
+[More detail ia available here](https://github.com/saisree369/Movies/docs/Movies.docx)
+
+## Getting Started
+
+Programming Language - Reactnative
+You can clone the code directly and build it in VS Code
+
+# MovieviceApp Android Release
+
+cd Movies
+
+npm run new clear
+
+``## this step required to fix error in react-native-push-notification: Appears to be a git repo or submodule.``
+
+rm -rf node_modules/*/.git
+
+npm install
+
+``# patch some modules``
+
+npm  run patch-node-modules
+
+
+``# install in android``
+
+react-native run-android
+
+## Compatible devices
+- All android phones with SDK version >= 28
+
+## Project Screenshots 
+
+[Please find all the screenshots of all screens in the project](https://github.com/saisree369/Movies/tree/main/docs/Images)
+
+## Privacy 
+
+[Privacy Statement](https://docs.google.com/document/d/1KJkDmGjLHr8aT6ed64ZA7X84sXQS5Svt-4MC8aEAbfw/edit)
+
+## Acknowledgements
+
+- Based on [Call For Code's README template](https://github.com/Call-for-Code/Project-Sample/blob/main/README.md)
+
+
 
 
   
