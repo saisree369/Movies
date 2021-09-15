@@ -54,8 +54,7 @@ The project currently does the following things
 It displays the Carousel view of Movies and the Genre List Movies 
 
 #### Carousel View
-[Home screen Carousel View](https://github.com/saisree369/Movies/docs/Images/carousel.png)
-
+![Home screen Carousel View](https://github.com/saisree369/Movies/docs/Images/carousel.png?raw=true "Carousel")
 
 
 ## Getting Started
