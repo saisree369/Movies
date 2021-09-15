@@ -49,7 +49,7 @@ On clicking genre item in search screen it navigates to this screen and displays
 Programming Language - Reactnative
 You can clone the code directly and build it in VS Code
 
-# MovieviceApp Android Release
+``## MovieviceApp Android Release``
 
 cd Movies
 
