@@ -85,7 +85,7 @@ renderElement=(contain) => {
         method: 'GET',
        
     }
-    fetch('https://api.themoviedb.org/3/search/movie?api_key=e60f97467e53623440ba3a914746753f&language=en-US&query=' + this.props.navigation.state.params.genre, data)
+    fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&language=en-US&query=' + this.props.navigation.state.params.genre, data)
         .then(response => response.json())
         .then(responseJson => {
             this.setState({
@@ -123,17 +123,7 @@ renderElement=(contain) => {
 searchFilterFunction = (text) => {
     // Check if searched text is not blank
     if (text) {
-      // Inserted text is not blank
-      // Filter the masterDataSource
-      // Update FilteredDataSource
-      // const newData = this.state.masterDataSource.filter(
-      //   function (item) {
-      //     const itemData = item.Title
-      //       ? item.Title.toUpperCase()
-      //       : ''.toUpperCase();
-      //     const textData = text.toUpperCase();
-      //     return itemData.indexOf(textData) > -1;
-      // });
+      
       const newData=[];
       
       for (let i=0;i<this.state.masterDataSource.results.length;i++){
