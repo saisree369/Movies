@@ -54,7 +54,37 @@ The project currently does the following things
 It displays the Carousel view of Movies and the Genre List Movies 
 
 #### Carousel View
-![Home screen Carousel View](https://github.com/saisree369/Movies/docs/Images/carousel.png?raw=true "Carousel")
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/carousel.png?raw=true "Carousel")
+
+Middle Component :  It displays the Middle genre List in the middle component in the Home Screen
+
+#### Middle Component View
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Home_middle.png?raw=true "Middle")
+
+#### GameDetail Screen
+
+##### Carousel View navigation
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Movie_details.png?raw=true "Game Detail")
+
+##### Home MiddleView navigation
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/GameDetails_2.png?raw=true "Game Detail")
+
+#### Search Screen
+
+It displays the genres list of movies on applying search
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_1.png?raw=true "Search1")
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_2.png?raw=true "Search2")
+
+#### Search Category Screen
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_category.png?raw=true "Search_category")
+
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_category_2.png?raw=true "Search_category")
 
 
 ## Getting Started
