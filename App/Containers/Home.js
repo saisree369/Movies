@@ -142,7 +142,7 @@ UNSAFE_componentWillMount(){
 componentDidMount() {
   
     return fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=e60f97467e53623440ba3a914746753f",
+      "https://api.themoviedb.org/3/discover/movie?api_key=xxx",
       {
         method: "GET"
       }
