@@ -90,7 +90,7 @@ renderElement=(contain) => {
         method: 'GET',
        
     }
-    fetch('https://api.themoviedb.org/3/search/movie?api_key=e60f97467e53623440ba3a914746753f&query=' + this.props.navigation.state.params.app_id, data)
+    fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx' + this.props.navigation.state.params.app_id, data)
         .then(response => response.json())
         .then(responseJson => {
             this.setState({
