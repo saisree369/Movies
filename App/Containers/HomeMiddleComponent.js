@@ -287,7 +287,7 @@ componentDidMount() {
      for(let j=0; j<this.state.titles.length;j++){
     var dataSource = [];
       titles_list[j] = this.state.titles[j];
-      fetch('https://api.themoviedb.org/3/search/movie?api_key=e60f97467e53623440ba3a914746753f&query=' + titles_list[j],
+      fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&query=' + titles_list[j],
                   {
                     method: "GET"
                   }
