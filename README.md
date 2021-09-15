@@ -11,6 +11,7 @@ Android application which allow users to easily figure out the movies that are c
     - [The idea](#the-idea)
     - [Summary](#summary)
   - [Long description](#long-description)
+  - [Project roadmap](#project-roadmap)
   - [Getting Started](#getting-started)
   - [Project screenshots](#project-screenshots)
   - [Privacy](#privacy)
@@ -43,6 +44,19 @@ On clicking genre item in search screen it navigates to this screen and displays
 
 ## Long description
 [More detail is available here](https://github.com/saisree369/Movies/docs/Movies.docx)
+
+## Project roadmap
+
+The project currently does the following things
+
+### Home Screen
+
+It displays the Carousel view of Movies and the Genre List Movies 
+
+#### Carousel View
+[Home screen Carousel View](https://github.com/saisree369/Movies/docs/Images/carousel.png)
+
+
 
 ## Getting Started
 
