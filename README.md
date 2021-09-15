@@ -82,6 +82,8 @@ It displays the genres list of movies on applying search
 
 #### Search Category Screen
 
+It displays the genres list of movies in detail on applying search
+
 ![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_category.png?raw=true "Search_category")
 
 ![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/Search_category_2.png?raw=true "Search_category")
@@ -127,11 +129,4 @@ react-native run-android
 ## Acknowledgements
 
 - Based on [Call For Code's README template](https://github.com/Call-for-Code/Project-Sample/blob/main/README.md)
-
-
-
-
-  
-  
-  
 
