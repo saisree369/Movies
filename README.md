@@ -42,7 +42,7 @@ which displays the genre items and on applying search, it filters the genre base
 On clicking genre item in search screen it navigates to this screen and displays the Movie apps.
 
 ## Long description
-[More detail ia available here](https://github.com/saisree369/Movies/docs/Movies.docx)
+[More detail is available here](https://github.com/saisree369/Movies/docs/Movies.docx)
 
 ## Getting Started
 
