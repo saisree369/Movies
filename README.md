@@ -22,7 +22,7 @@ It is a user-friendly application which displays the movies based on different g
 We use TMDB website to frame API's and use them to fetch data to the screens in this app.
 API formation - user can create an account in tmdb and frame their own API's with the access token provided.
 
-### idea
+### The idea
 Creating user friendly platform for the users which displays the movies based on different genres like Featured,Action,Adventure,Role playing,Sports,Racing.
 
 ### Summary
