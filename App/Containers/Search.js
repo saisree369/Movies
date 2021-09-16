@@ -645,11 +645,14 @@ let Loading = (
                 placeholderTextColor="#2c2a2a"
             />
             </View>
-          <View style ={{flex:1}}>
+         <ScrollView>
            {
-                   (this.state.isLoading === true) ? Loading : feature_menu  
+                   (this.state.search == "") ? 
+                    (this.state.isLoading === true) ? Loading : feature_menu  
+                    :
+                    (this.state.isLoading === true) ? Loading : search_menu 
            } 
-          </View>
+          </ScrollView>
         </View>
     );
     
