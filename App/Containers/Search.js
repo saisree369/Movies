@@ -1,5 +1,5 @@
 import React, { Component,useEffect, useState } from 'react'
-import { View, ScrollView, Text, Image, Dimensions,FlatList,SafeAreaView,TextInput, TouchableWithoutFeedback,TouchableOpacity,ActivityIndicator, Linking,StyleSheet } from 'react-native'
+import { View, ScrollView, Text, Image,ImageBackground, Dimensions,FlatList,SafeAreaView,TextInput, TouchableWithoutFeedback,TouchableOpacity,ActivityIndicator, Linking,StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';  
   var newData=[];
         let newData2=[];
@@ -39,7 +39,10 @@ constructor(props) {
         masterDataSource:[],
         titles:["VirtualGenres","Genres"],
         text_input:"",
-        orientation: isPortrait() ? 'portrait' : 'landscape'
+        orientation: isPortrait() ? 'portrait' : 'landscape',
+        searchDataSource:[],
+        mainSearchDataSource:[]
+
       };
 
   
@@ -54,9 +57,253 @@ this.searchFilterFunction = this.searchFilterFunction.bind(this);
       
 }
 
+
+  numFormatter = (num) => {
+     if(num > 999 && num < 1000000){
+        return (num/1000).toFixed(1) + 'k'; // convert to K for number from > 1000 < 1 million 
+    }else if(num > 1000000){
+        return (num/1000000).toFixed(1) + 'm'; // convert to M for number from > 1 million 
+    }else if(num < 900){
+        return num; // if value < 1000, nothing to do
+    }
+  };
+
+
+renderElement=(contain) => {
+   if(contain >= 8.0 && contain <= 10.0){
+      return (
+        <View style={{width:70,height:25,borderRadius:6,backgroundColor:"#9ACD32",marginTop:115,marginLeft:6,flex:0}}> 
+           <Text style ={{fontSize:13,color:"#fff",marginLeft:10,marginTop:2,fontWeight:"bold"}}>{contain.toFixed(1)}</Text>
+        </View>
+      );
+   }
+   else if(contain >= 3.0 && contain < 8.0){
+     return (
+        <View style={{width:70,height:25,borderRadius:6,backgroundColor:"#ffd700",marginTop:115,marginLeft:6}}> 
+          <Text style ={{fontSize:13,color:"#fff",marginLeft:10,marginTop:2,fontWeight:"bold"}}>{contain.toFixed(1)}</Text>
+        </View>
+      );
+   }
+
+   else if(contain == 0.0 && contain < 3.0 ){
+     return (
+        <View style={{width:70,height:25,borderRadius:6,backgroundColor:"#fff",marginTop:115,marginLeft:6,opacity:0.5}}> 
+          <Text style ={{fontSize:13,color:"#fff",marginLeft:10,marginTop:2,fontWeight:"bold"}}>{contain.toFixed(1)}</Text>
+        </View>
+      );
+   }
+
+    else if(contain == null ){
+     return (
+        <View style={{width:70,height:25,borderRadius:6,backgroundColor:"#fff",marginTop:115,marginLeft:6,opacity:0.5}}> 
+          <Text style ={{fontSize:13,color:"#fff",marginLeft:10,marginTop:2,fontWeight:"bold"}}>N/A</Text>
+        </View>
+      );
+   }
+}
+
+renderElement_star=(contain) => {
+   if(contain == 10.00){
+      return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain == 8.00 ){
+      return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain > 8.00 && contain < 10.00){
+     return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star-half" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+      );
+   }
+
+  else if(contain == 6.00 ){
+      return (
+         <View style={{flexDirection:"row"}}>
+                  <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain > 6.00 && contain < 8.00){
+     return (
+         <View style={{flexDirection:"row"}}>
+                  <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star-half" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+      );
+   }
+
+   else if(contain == 4.00 ){
+      return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain > 4.00 && contain < 6.00){
+     return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star-half" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+      );
+   }
+   else if(contain == 2.00 ){
+      return (
+         <View style={{flexDirection:"row"}}>
+                  <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain > 2.00 && contain < 4.00){
+     return (
+         <View style={{flexDirection:"row"}}>
+                  <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star-half" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+      );
+   }
+    else if(contain == 0.00 ){
+      return (
+         <View style={{flexDirection:"row"}}>
+                 <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+
+      );
+   }
+   else if(contain > 0.00 && contain < 2.00){
+     return (
+         <View style={{flexDirection:"row"}}>
+                  <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{Math.round((contain + Number.EPSILON) * 100) / 100}</Text>
+                  <Icon name="star-half" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffffff"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+          </View>
+      );
+   }
+}
+
 componentWillMount() {
-  
+ 
     return fetch(
+      
       "https://api.themoviedb.org/3/genre/movie/list?api_key=xxx&language=en-US",
       {
         method: "GET"
@@ -79,42 +326,10 @@ componentWillMount() {
                      this.setState({
                       isLoading: false,
                       filteredDataSource2: main_data2,
-                  //   titles: this.state.titles[j]
                     });
                     }
         
-     /*   
-        switch (j) {
-            case 0:
-                    for (let i=0;i<this.state.masterDataSource.virtualGenres.length;i++){
-                        main_data[i]=this.state.masterDataSource.virtualGenres[i];
-                    
-                    //  console.log("data " + JSON.stringify(featured_data[i]));
-                    this.setState({
-                      isLoading: false,
-                      filteredDataSource: main_data,
-                    });
-                    }
-                    break;
-            case 1:
-                    for (let i=0;i<this.state.masterDataSource.genres.length;i++){
-                        main_data2[i]=this.state.masterDataSource.genres[i];
-                     this.setState({
-                      isLoading: false,
-                      filteredDataSource2: main_data2,
-                  //   titles: this.state.titles[j]
-                    });
-                    }
-                    break;
-                   
-                    default:
-                    break;
-            }*/
 
-            
-        
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
        
     }
        
@@ -129,189 +344,74 @@ componentWillMount() {
 
 
 
-masterData(responseJson){
-  let masterData = responseJson;
-   for(let j=0; j<2;j++){
 
-     for (let i=0;i<masterData.genres.length;i++){
-                        featured_data2[i]=masterData.genres[i];
-                      this.setState({
-                      isLoading: false,
-                      filteredDataSource2: featured_data2,
-                  //   titles: this.state.titles[j]
-                    });
-                    }
-       
-    /*    
-        switch (j) {
-            case 0:
-                    for (let i=0;i<masterData.virtualGenres.length;i++){
-                        featured_data[i]=masterData.virtualGenres[i];
-                    
-                    //  console.log("data " + JSON.stringify(featured_data[i]));
-                    this.setState({
-                      isLoading: false,
-                      filteredDataSource: featured_data,
-                    });
-                     
-                    }
-                    break;
-            case 1:
-                    for (let i=0;i<masterData.genres.length;i++){
-                        featured_data2[i]=masterData.genres[i];
-                      this.setState({
-                      isLoading: false,
-                      filteredDataSource2: featured_data2,
-                  //   titles: this.state.titles[j]
-                    });
-                    }
-                    break;
-                   
-                    default:
-                    break;
-            }
-
-            */
-        
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
-       
-    }
-}
- 
-
- fetchData(){
-
- }
 
 searchFilterFunction = (text) => {
     // Check if searched text is not blank
     if (text) {
      
-      for(let k=0; k<2;k++){
-
-           for (let l=0;l<this.state.masterDataSource.genres.length;l++){
-                        newData2 = this.state.masterDataSource.genres.filter(
-                            function (item) {
-                            const itemData = item.name
-                                ? item.name.toUpperCase()
-                                : ''.toUpperCase();
-                            const textData = text.toUpperCase();
-                            return itemData.indexOf(textData) > -1;
-                            });
-
-                             this.setState({
-                              isLoading: false,
-                              filteredDataSource2:newData2,
-                              search : text,
-                          //    titles: this.state.titles[i]
-                              });
-                      }
-    /*  
-        switch (k) {
-            case 0:
-                    for (let l=0;l<this.state.masterDataSource.virtualGenres.length;l++){
-                         newData = this.state.masterDataSource.virtualGenres.filter(
-                             function (item) {
-                            const itemData = item.name
-                                ? item.name.toUpperCase()
-                                : ''.toUpperCase();
-                            const textData = text.toUpperCase();
-                            return itemData.indexOf(textData) > -1;
-                             });
-
-
-                             this.setState({
-                              isLoading: false,
-                              filteredDataSource: newData,
-                              search : text,
-                          //    titles: this.state.titles[i]
-                              });
-
-                         
-                    }
-
-                       
-                    //  console.log("data " + JSON.stringify(featured_data[i]));
-                    break;
-            case 1:
-                    for (let l=0;l<this.state.masterDataSource.genres.length;l++){
-                        newData2 = this.state.masterDataSource.genres.filter(
-                            function (item) {
-                            const itemData = item.name
-                                ? item.name.toUpperCase()
-                                : ''.toUpperCase();
-                            const textData = text.toUpperCase();
-                            return itemData.indexOf(textData) > -1;
-                            });
-
-                             this.setState({
-                              isLoading: false,
-                              filteredDataSource2:newData2,
-                              search : text,
-                          //    titles: this.state.titles[i]
-                              });
-                      }
-                         
-                     
-                    break;
-                    default:
-                    break;
-    }
-      */
+     let data = {
+            method: 'GET',
+          
+        }
+        fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&language=en-US&query=' + text, data)
+            .then(response => response.json())
+            .then(responseJson => {
+                this.setState({
+                    isLoading: false,
+                    error: false,
+                    mainSearchDataSource: responseJson,
+                    searchDataSource: responseJson,
+                    
+                });
+                 
+            })
+            .catch(error => {
+                this.setState({
+                    isLoading: false,
+                    error: true
+                })
+                console.error(error);
+            });
         
-    } 
+      
+      
+      for (let i=0;i<this.state.mainSearchDataSource.results.length;i++){
+            const itemData = this.state.mainSearchDataSource.results[i].title.toLowerCase() ? this.state.mainSearchDataSource.results[i].title.toLowerCase() : '';
+            const textData = text.toLowerCase();
+      
+        for (let j=i;j<itemData.length;j++){
+      
+             //   return itemData.indexOf(textData) > -1;
+            
+              if (itemData.indexOf(textData) == -1) {
+                 newData.push(this.state.mainSearchDataSource.results[j]);
+              }
+     
+        }
+      }
+      this.setState({
+            isLoading: false,
+            searchDataSource : newData,
+            search : text,
+          });
     }
     else if(!text || text === '') {
        
-      for(let j=0; j<2;j++){
+    
 
          for (let i=0;i<this.state.masterDataSource.genres.length;i++){
                         featured_data2[i]=this.state.masterDataSource.genres[i];
                      this.setState({
                       isLoading: false,
                       filteredDataSource2: featured_data2,
-                      search : text,
-                  //   titles: this.state.titles[j]
+                      search : text
                     });
                     }
         
-     /*
-        switch (j) {
-            case 0:
-                    for (let i=0;i<this.state.masterDataSource.virtualGenres.length;i++){
-                        featured_data[i]=this.state.masterDataSource.virtualGenres[i];
-                    
-                    //  console.log("data " + JSON.stringify(featured_data[i]));
-                    this.setState({
-                      isLoading: false,
-                      filteredDataSource: featured_data,
-                      search : text,
-                    });
-                    }
-                    break;
-            case 1:
-                    for (let i=0;i<this.state.masterDataSource.genres.length;i++){
-                        featured_data2[i]=this.state.masterDataSource.genres[i];
-                     this.setState({
-                      isLoading: false,
-                      filteredDataSource2: featured_data2,
-                      search : text,
-                  //   titles: this.state.titles[j]
-                    });
-                    }
-                    break;
-                   
-                    default:
-                    break;
-            }*/
-
-            
-        
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
+   
        
-    }
+    
   };
 
 }
@@ -343,7 +443,39 @@ let Loading = (
         );
 
   if (this.state.orientation === 'portrait') {
-  
+      let search_menu = (
+   <View style={{backgroundColor:"#2c2a2a"}}>
+       
+      
+      <FlatList
+         numColumns={4}    
+        showsHorizontalScrollIndicator={false}
+        data={this.state.searchDataSource.results}
+        ItemSeparatorComponent = {ItemSeparatorView}
+        renderItem={({item}) => 
+          <View style={{flex:1}}>
+              <ImageBackground source= {{uri:'https://image.tmdb.org/t/p/w185/' + item.backdrop_path}} style={{width:90 , height:110,marginLeft:10,borderRadius: 4, overflow: 'hidden'}}>
+                <Icon name="heart" size={18} color="#ffd700"
+                  style={{ marginLeft:147,marginTop:4}}/>
+              
+              </ImageBackground>
+                <View style ={{backgroundColor:"#555555",width:90 , height:70,marginLeft:10}}>
+                <View style={{flexDirection:"row"}}>
+                  {
+                    this.renderElement_star(Math.round((item.vote_average + Number.EPSILON) * 100) / 100)
+                  }
+                  <Text style ={{fontSize:5.5,color:"#fff",marginLeft:2,marginTop:12}} numberOfLines={1}>({this.numFormatter(item.vote_count)})</Text>
+                </View>
+                <Text style ={{fontSize:9,color:"#fff",marginLeft:5,marginTop:5,fontWeight:"bold"}} numberOfLines={1}>{item.original_title}</Text>
+               
+
+                </View>
+          </View>
+        }
+        
+        keyExtractor={(item, index) => index}/>
+         </View>
+      );
    let feature_menu = (  
  
         <View style={styles.container}>
@@ -396,11 +528,14 @@ let Loading = (
                 placeholderTextColor="#2c2a2a"
             />
             </View>
-          <View style ={{flex:1}}>
+           <ScrollView>
            {
-                   (this.state.isLoading === true) ? Loading : feature_menu  
+                   (this.state.search == "") ? 
+                    (this.state.isLoading === true) ? Loading : feature_menu  
+                    :
+                    (this.state.isLoading === true) ? Loading : search_menu 
            } 
-          </View>
+          </ScrollView>
         </View>
     );
     
@@ -418,6 +553,47 @@ let Loading = (
 
   else {
   
+      let search_menu = (
+     <View style={styles.container}>
+       
+      
+      <FlatList
+         numColumns={7}    
+        showsHorizontalScrollIndicator={false}
+        data={this.state.searchDataSource.results}
+        ItemSeparatorComponent = {ItemSeparatorView}
+        renderItem={({item}) => 
+          <View style={{flex:1}}>
+              <ImageBackground source= {{uri:'https://image.tmdb.org/t/p/w185/' + item.backdrop_path}} style={{width:90 , height:110,marginLeft:10,borderRadius: 4, overflow: 'hidden'}}>
+                <Icon name="heart" size={18} color="#ffd700"
+                  style={{ marginLeft:147,marginTop:4}}/>
+              
+              </ImageBackground>
+                <View style ={{backgroundColor:"#555555",width:90 , height:70,marginLeft:10}}>
+                <View style={{flexDirection:"row"}}>
+                <Text style ={{fontSize:8,color:"#fff",marginLeft:4,marginTop:10,fontWeight:"bold"}} numberOfLines={1}>{item.vote_average}</Text>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:3 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Icon name="star" size={6}  color="#ffd700"
+                  style={{ marginTop: 14,marginLeft:2 }}/>
+                  <Text style ={{fontSize:5.5,color:"#fff",marginLeft:2,marginTop:12}} numberOfLines={1}>({this.numFormatter(item.vote_count)})</Text>
+                </View>
+                <Text style ={{fontSize:9,color:"#fff",marginLeft:5,marginTop:5,fontWeight:"bold"}} numberOfLines={1}>{item.original_title}</Text>
+         
+
+                </View>
+          </View>
+        }
+        
+        keyExtractor={(item, index) => index}/>
+         </View>
+      );
    let feature_menu = (  
  
         <View style={styles.container}>
