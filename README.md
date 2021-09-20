@@ -122,6 +122,10 @@ react-native run-android
 
 [Please find all the screenshots of all screens in the project](https://github.com/saisree369/Movies/tree/main/docs/Images)
 
+## Project APK 
+
+[Please find the APK for download](https://github.com/saisree369/Movies/android/app/build/outputs/apk/debug/app-debug.apk)
+
 ## Privacy 
 
 [Privacy Statement](https://docs.google.com/document/d/1KJkDmGjLHr8aT6ed64ZA7X84sXQS5Svt-4MC8aEAbfw/edit)
