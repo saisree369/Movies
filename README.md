@@ -71,7 +71,7 @@ Middle Component :  It displays the Middle genre List in the middle component in
 
 ##### Home MiddleView navigation
 
-![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/MovieDetails_2.png?raw=true "Game Detail")
+![Alt text](https://github.com/saisree369/Movies/blob/main/docs/Images/MovieDetails2.png?raw=true "Game Detail")
 
 #### Search Screen
 
