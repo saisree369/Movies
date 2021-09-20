@@ -2,13 +2,13 @@ import React, { Component } from 'react';
  
 import { ActivityIndicator, Alert,Dimensions,TouchableOpacity, FlatList, ScrollView,SafeAreaView,ImageBackground,Text, StyleSheet, View, TextInput } from 'react-native';
  import Icon from 'react-native-vector-icons/FontAwesome'; 
- import GameDetail_Header from './GameDetail_Header.js';
+ import MovieDetail_Header from './MovieDetail_Header.js';
 export default class Search extends Component {
 static navigationOptions = ({ navigation, navigationOptions }) => {
         const { params } = navigation.state;
 
         return {
-            title: 'GameDetails'
+            title: 'MovieDetails'
             // title: params ? params.otherParam : 'Home',
             /* These values are used instead of the shared configuration! */
         };
@@ -90,7 +90,7 @@ renderElement=(contain) => {
         method: 'GET',
        
     }
-    fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx' + this.props.navigation.state.params.app_id, data)
+    fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&query=' + this.props.navigation.state.params.app_id, data)
         .then(response => response.json())
         .then(responseJson => {
             this.setState({
@@ -187,7 +187,7 @@ if (this.state.orientation === 'portrait') {
  return (
     
       <View style={styles.MainContainer}>
-        <GameDetail_Header {...this.props}/>
+        <MovieDetail_Header {...this.props}/>
        
           {menu}
          </View> 
@@ -197,7 +197,7 @@ if (this.state.orientation === 'portrait') {
       return (
           
       <View style={styles.MainContainer}>
-        <GameDetail_Header {...this.props}/>
+        <MovieDetail_Header {...this.props}/>
 
         <ScrollView>
            {menu}

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Search from "./Search.js"
 
 
-export default class GameDetail_Header extends Component {
+export default class MovieDetail_Header extends Component {
      constructor() {
     super();
 
@@ -33,7 +33,7 @@ export default class GameDetail_Header extends Component {
     render() {
         console.disableYellowBox = true;
      
-    const HeaderComponent = ({ navigation }) => (<GameDetail_Header navigation={navigation}/>);
+    const HeaderComponent = ({ navigation }) => (<MovieDetail_Header navigation={navigation}/>);
        if (this.state.orientation === 'portrait') {
         return(
             <View style={styles.container}>
@@ -48,7 +48,7 @@ export default class GameDetail_Header extends Component {
                     color="#fff"/>
                 </TouchableOpacity>
                 <View style ={{width:100,marginLeft:120}}>
-                <Text style = {{color:'#fff',fontSize:15}}>GameDetail</Text>
+                <Text style = {{color:'#fff',fontSize:15}}>MovieDetail</Text>
                 </View>
                
                 </View>
@@ -69,7 +69,7 @@ export default class GameDetail_Header extends Component {
                     color="#fff"/>
                 </TouchableOpacity>
                 <View style ={{width:100,marginLeft:270}}>
-                <Text style = {{color:'#fff',fontSize:15}}>GameDetail</Text>
+                <Text style = {{color:'#fff',fontSize:15}}>MovieDetail</Text>
                 </View>
                
                 </View>
