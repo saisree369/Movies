@@ -125,7 +125,7 @@ react-native run-android
 
 ## Project APK 
 
-[Please find the APK for download](https://github.com/saisree369/Movies/android/app/build/outputs/apk/debug/app-debug.apk)
+[Please find the APK for download](https://drive.google.com/file/d/1mnnN_CPo2-h5GTV9lvXOoHIJUm3dsxeu/view?usp=drivesdk)
 
 ## Privacy 
 
