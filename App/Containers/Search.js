@@ -304,7 +304,7 @@ componentWillMount() {
  
     return fetch(
       
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=xxx&language=en-US",
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=e60f97467e53623440ba3a914746753f&language=en-US",
       {
         method: "GET"
       }
@@ -354,7 +354,7 @@ searchFilterFunction = (text) => {
             method: 'GET',
           
         }
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&language=en-US&query=' + text, data)
+        fetch('https://api.themoviedb.org/3/search/movie?api_key=e60f97467e53623440ba3a914746753f&language=en-US&query=' + text, data)
             .then(response => response.json())
             .then(responseJson => {
                 this.setState({
@@ -374,7 +374,7 @@ searchFilterFunction = (text) => {
                 console.error(error);
             });
         
-      
+      if(this.state.isLoading == false){
       
       for (let i=0;i<this.state.mainSearchDataSource.results.length;i++){
             const itemData = this.state.mainSearchDataSource.results[i].title.toLowerCase() ? this.state.mainSearchDataSource.results[i].title.toLowerCase() : '';
@@ -396,6 +396,9 @@ searchFilterFunction = (text) => {
             search : text,
           });
     }
+    }
+
+
     else if(!text || text === '') {
        
     
@@ -408,11 +411,7 @@ searchFilterFunction = (text) => {
                       search : text
                     });
                     }
-        
-   
-       
-    
-  };
+   };
 
 }
 

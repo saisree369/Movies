@@ -30,23 +30,9 @@ export default class NavigationDrawer extends Component{
 
   
   render(){
-  let label = "Firmware";
 
 
-  let Firmware = (  
-       <View style={{flexDirection:"row"}}>  
-					<Text style={{color:'black',fontSize:16,marginHorizontal:12,marginTop:10}}>{label}</Text>
-          <Icon name="circle" size={14} color="red" style={{marginTop:18}}/>
-				</View>
-        );
-
-    let Normal = (  
-       <View style={{flexDirection:"row"}}>  
-					<Text style={{color:'black',fontSize:16,marginHorizontal:12,marginTop:10}}>{label}</Text>
-          <Icon name="" size={14} color="red" style={{margin:10}}/>
-				</View>
-        );
-
+  
     return (
       <SafeAreaView style={{ flex: 1 }}>
     
@@ -99,17 +85,7 @@ export default class NavigationDrawer extends Component{
                        </TouchableOpacity>
                   </View>
                 <View style={{borderWidth: 0.5,borderColor:'black',marginTop:15}}/>  
-                 <TouchableOpacity  onPress={() => {
-                        //this.change()
-                        this.props.navigation.navigate("Firmware");}}>
-               <View style={{flexDirection:'row',marginVertical:5}}>
-                   {  
-                      (label == "Firmware") ? Firmware : Normal  
-                      
-                   }
-                
-                  </View>
-                 </TouchableOpacity>
+              
         </View>
       </SafeAreaView>
     );

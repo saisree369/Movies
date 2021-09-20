@@ -142,7 +142,7 @@ UNSAFE_componentWillMount(){
 componentDidMount() {
   
     return fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=xxx",
+      "https://api.themoviedb.org/3/discover/movie?api_key=e60f97467e53623440ba3a914746753f",
       {
         method: "GET"
       }
@@ -169,7 +169,7 @@ componentDidMount() {
             if (item.id) {
               //console.log("renderCarouselItem - sourceUri: " + JSON.stringify(sourceUri));
               carouselLink = () => {
-                    this.props.navigation.navigate("GameDetails", { app_id: item.title});
+                    this.props.navigation.navigate("MovieDetails", { app_id: item.title});
                 };
            
             }

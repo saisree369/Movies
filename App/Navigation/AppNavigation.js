@@ -12,11 +12,10 @@ import NavigationDrawer from "./NavigationDrawer";
 import Home from "../Containers/Home";
 import Favorites from "../Containers/Favorites";
 import WebContent from "../Containers/WebContent";
-import Firmware from "../Containers/Firmware";
 import Search from "../Containers/Search";
 import Search_category from "../Containers/Search_category";
 import HomeMiddleComponent from "../Containers/HomeMiddleComponent";
-import GameDetails from "../Containers/GameDetails";
+import MovieDetails from "../Containers/MovieDetails";
 import Header from "../Containers/Header";
 
 
@@ -68,7 +67,6 @@ const AppDrawerNavigator = createDrawerNavigator({
     Home:{screen:AppTabBottomNavigator},
     Favorites:{screen:Favorites},
     WebContent: { screen: WebContent },
-    Firmware : {screen:Firmware},
     NavigationDrawer: { screen: NavigationDrawer },
   },
   {
@@ -83,7 +81,7 @@ const PrimaryNav = createStackNavigator(
 		LoginScreen: { screen: LoginScreen },
 		LaunchScreen: { screen: LaunchScreen },
 		Home: { screen: AppDrawerNavigator},
-    GameDetails:{screen:GameDetails},
+    MovieDetails:{screen:MovieDetails},
     Search:{screen:Search},
     Search_category:{screen:Search_category}
 

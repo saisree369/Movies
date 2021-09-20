@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 
 import Platform from '../Config/Platform'
 
-import styles from '../Containers/Styles/GameCardStyles'
+import styles from '../Containers/Styles/MovieCardStyles'
 
 
 export default class LayoutUtil {

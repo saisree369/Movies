@@ -32,7 +32,7 @@ export default class WebContent extends Component {
         return (
         <WebView
             source={{
-                uri: 'https://gamevice.com/pages/faq-app'
+                uri: 'https://docs.google.com/document/d/1KJkDmGjLHr8aT6ed64ZA7X84sXQS5Svt-4MC8aEAbfw/edit'
                 }}
                 style={{ marginTop: 20 }}
             />

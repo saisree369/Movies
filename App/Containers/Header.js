@@ -57,7 +57,7 @@ export default class Header extends Component {
                     color="#fff"/>
                 </TouchableOpacity>
                 <View style ={{width:100,marginLeft:120}}>
-                <Text style = {{color:'#fff'}}>TRUFFLE</Text>
+                <Text style = {{color:'#fff'}}>MOVIES</Text>
                 </View>
                 <TouchableOpacity  onPress={() => {
                 //this.change()
@@ -86,7 +86,7 @@ export default class Header extends Component {
                     color="#fff"/>
                 </TouchableOpacity>
                 <View style ={{width:100,marginLeft:260}}>
-                <Text style = {{color:'#fff'}}>TRUFFLE</Text>
+                <Text style = {{color:'#fff'}}>MOVIES</Text>
                 </View>
                 <TouchableOpacity  onPress={() => {
                 //this.change()

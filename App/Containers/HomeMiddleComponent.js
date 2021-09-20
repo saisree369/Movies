@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text,SafeAreaView,Image,TouchableOpacity, Dimensions, ActivityIndicator,ImageBackground, FlatList,StyleSheet ,LogBox } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import GameDetails from './GameDetails.js'
+import MovieDetails from './MovieDetails.js'
 
 
 
@@ -287,7 +287,7 @@ componentDidMount() {
      for(let j=0; j<this.state.titles.length;j++){
     var dataSource = [];
       titles_list[j] = this.state.titles[j];
-      fetch('https://api.themoviedb.org/3/search/movie?api_key=xxx&query=' + titles_list[j],
+      fetch('https://api.themoviedb.org/3/search/movie?api_key=e60f97467e53623440ba3a914746753f&query=' + titles_list[j],
                   {
                     method: "GET"
                   }
@@ -381,7 +381,7 @@ return (
           <View style={{flex:1}}>
            <TouchableOpacity 
               onPress= { ()=> {
-                  const {navigate} = this.props.navigation.navigate("GameDetails",{ app_id: item.title})}}>
+                  const {navigate} = this.props.navigation.navigate("MovieDetails",{ app_id: item.title})}}>
               <ImageBackground source= {{uri:'https://image.tmdb.org/t/p/w185/' + item.backdrop_path}} style={{width:170 , height:170,marginLeft:10,borderRadius: 8, overflow: 'hidden'}}>
                 <Icon name="heart" size={18} color="#ffd700"
                   style={{ marginLeft:147,marginTop:4}}/>
