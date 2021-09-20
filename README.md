@@ -14,6 +14,7 @@ Android application which allow users to easily figure out the movies that are c
   - [Project roadmap](#project-roadmap)
   - [Getting Started](#getting-started)
   - [Project screenshots](#project-screenshots)
+  - [Project APK](#project-apk)
   - [Privacy](#privacy)
   - [Acknowledgments](#acknowledgements)
 
