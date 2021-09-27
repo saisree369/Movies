@@ -17,6 +17,7 @@ import Search_category from "../Containers/Search_category";
 import HomeMiddleComponent from "../Containers/HomeMiddleComponent";
 import MovieDetails from "../Containers/MovieDetails";
 import Header from "../Containers/Header";
+import MovieDetails_Sub from "../Containers/MovieDetails_Sub";
 
 
 export default class AppNavigation extends Component {
@@ -83,7 +84,8 @@ const PrimaryNav = createStackNavigator(
 		Home: { screen: AppDrawerNavigator},
     MovieDetails:{screen:MovieDetails},
     Search:{screen:Search},
-    Search_category:{screen:Search_category}
+    Search_category:{screen:Search_category},
+    MovieDetails_Sub:{screen:MovieDetails_Sub}
 
 	},
 	{

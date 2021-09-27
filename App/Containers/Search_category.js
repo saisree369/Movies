@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
  
-import { ActivityIndicator, Alert,Dimensions, FlatList, ScrollView,SafeAreaView,ImageBackground,Text, StyleSheet, View, TextInput } from 'react-native';
+import { ActivityIndicator, Alert,Dimensions,TouchableOpacity, FlatList, ScrollView,SafeAreaView,ImageBackground,Text, StyleSheet, View, TextInput } from 'react-native';
  import Icon from 'react-native-vector-icons/FontAwesome';  
 
  let main_data=[];
@@ -124,22 +124,30 @@ searchFilterFunction = (text) => {
     // Check if searched text is not blank
     if (text) {
       
-      const newData=[];
+      // const newData=[];
       
-      for (let i=0;i<this.state.masterDataSource.results.length;i++){
-            const itemData = this.state.masterDataSource.results[i].title.toLowerCase() ? this.state.masterDataSource.results[i].title.toLowerCase() : '';
-            const textData = text.toLowerCase();
+      // for (let i=0;i<this.state.masterDataSource.results.length;i++){
+      //       const itemData = this.state.masterDataSource.results[i].title.toLowerCase() ? this.state.masterDataSource.results[i].title.toLowerCase() : '';
+      //       const textData = text.toLowerCase();
       
-        for (let j=i;j<itemData.length;j++){
+      //   for (let j=i;j<itemData.length;j++){
       
-             //   return itemData.indexOf(textData) > -1;
+      //        //   return itemData.indexOf(textData) > -1;
             
-              if (itemData.indexOf(textData) == 0) {
-                 newData.push(this.state.masterDataSource.results[j]);
-              }
+      //         if (itemData.indexOf(textData) == 0) {
+      //            newData.push(this.state.masterDataSource.results[j]);
+      //         }
      
-        }
-      }
+      //   }
+      // }
+      const newData = this.state.masterDataSource.results.filter(
+        function (item) {
+          const itemData = item.title
+            ? item.title.toUpperCase()
+            : ''.toUpperCase();
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+      });
       this.setState({
             isLoading: false,
             appDataSource : newData,
@@ -401,11 +409,15 @@ return (
         ItemSeparatorComponent = {ItemSeparatorView}
         renderItem={({item}) => 
           <View style={{flex:1}}>
+           <TouchableOpacity 
+              onPress= { ()=> {
+                  const {navigate} = this.props.navigation.navigate("MovieDetails",{ app_id: item.title})}}>
               <ImageBackground source= {{uri:'https://image.tmdb.org/t/p/w185/' + item.backdrop_path}} style={{width:90 , height:110,marginLeft:10,borderRadius: 4, overflow: 'hidden'}}>
                 <Icon name="heart" size={18} color="#ffd700"
                   style={{ marginLeft:147,marginTop:4}}/>
               
               </ImageBackground>
+              </TouchableOpacity>
                 <View style ={{backgroundColor:"#555555",width:90 , height:70,marginLeft:10}}>
                 <View style={{flexDirection:"row"}}>
                   {

@@ -54,7 +54,6 @@ constructor(props) {
     });
   
 this.searchFilterFunction = this.searchFilterFunction.bind(this);
-this.filteredData = this.filteredData.bind(this);
       
 }
 
@@ -461,11 +460,15 @@ let Loading = (
         ItemSeparatorComponent = {ItemSeparatorView}
         renderItem={({item}) => 
           <View style={{flex:1}}>
+            <TouchableOpacity 
+              onPress= { ()=> {
+                  const {navigate} = this.props.navigation.navigate("MovieDetails",{ app_id: item.title})}}>
               <ImageBackground source= {{uri:'https://image.tmdb.org/t/p/w185/' + item.backdrop_path}} style={{width:90 , height:110,marginLeft:10,borderRadius: 4, overflow: 'hidden'}}>
                 <Icon name="heart" size={18} color="#ffd700"
                   style={{ marginLeft:147,marginTop:4}}/>
               
               </ImageBackground>
+              </TouchableOpacity>
                 <View style ={{backgroundColor:"#555555",width:90 , height:70,marginLeft:10}}>
                 <View style={{flexDirection:"row"}}>
                   {
